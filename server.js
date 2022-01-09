@@ -2,6 +2,8 @@ const express = require('express');
 
 const server = express();
 
+const PORT = process.env.PORT || 3000
+
 
 
 server.all('/', (req, res)=>{
@@ -18,7 +20,7 @@ server.all('/', (req, res)=>{
 
 function keepAlive(){
 
-   server.listen(5000, ()=>{console.log("Server is online!")});
+   server.listen(PORT, ()=>{console.log("Server is online!")});
 
 }
 
