@@ -1,5 +1,4 @@
 // const { Command } = require('discord-akairo');
-// const chalk = require('chalk');
 // const Discord = require('discord.js')
 
 

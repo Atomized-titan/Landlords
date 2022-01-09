@@ -12,18 +12,18 @@ var uniqueValidator = require('mongoose-unique-validator');
 
 class StatsCommand extends Command {
     constructor() {
-        super('dm', {
-            aliases: ['dm', 'd'],
+        super('landlord', {
+            aliases: ['landlord', 'Landlord', "LANDLORD"],
             channel: 'guild',
             category: 'Utilities',
             description: {
-                content: 'This provides the detailed stats of the bot.'
+                content: 'Gives the landlord role upon verification'
             }
         });
     }
 
     async exec(message) {
-        if (!message.member.roles.cache.some(role => role.id === '927565534684405760')) {
+        if (!message.member.roles.cache.some(role => role.id === '929780185040027728')) {
 
 
 
@@ -33,7 +33,7 @@ class StatsCommand extends Command {
                     .setTitle("To get Landlord Role")
                     .setAuthor(message.author.username, message.author.displayAvatarURL(), "")
                     .setColor("0xdbc72b")
-                    .setDescription("If you want to get <@&927565534684405760>, you need to hold at least 1 Land in Dine Together.")
+                    .setDescription("If you want to get <@&929780185040027728>, you need to hold at least 1 Land in Dine Together.")
                     .addField("The benefits:", ":white_check_mark:   The exclusive benefits of landlords \n :white_check_mark:   Access the channel for Landlord \n :white_check_mark:   Participate in events for Landlord \n :white_check_mark:   In-game mechanisms for landlords will be added gradually")
                     .addField("\u200B", "Now, after reading the rules and benefits carefully")
                     .addField("please check your direct message and reply to me with your wallet address!", "\u200B")
@@ -57,7 +57,7 @@ class StatsCommand extends Command {
             let filter = m => m.author.id === message.author.id
 
             // await appChannel.send('How old are you?');
-            await appChannel.awaitMessages(filter, { max: 1, time: 30 * 1000, errors: ['time'] }).then(async collected => {
+            await appChannel.awaitMessages(filter, { max: 1, time: 90 * 1000, errors: ['time'] }).then(async collected => {
                 const ans = (collected.map(answers => answers.content).join());
                 // if(ans.substring(0,2)!=="0x"){
                 //     message.reply("Please enter a valid wallet address like: ``0x............`` and try running the command in the server again.")
@@ -156,7 +156,7 @@ class StatsCommand extends Command {
 
                     // let role = message.guild.roles.cache.find(r => r.id === "927553751567466536");
 
-                    if (!message.member.roles.cache.some(role => role.id === '927565534684405760')) {
+                    if (!message.member.roles.cache.some(role => role.id === '929780185040027728')) {
                         const embed = new Discord.MessageEmbed()
                             .setTitle("Congratulations, you have successfully recieved the Landlord role!")
                             .setAuthor(message.author.username, message.author.displayAvatarURL(), "")
@@ -164,7 +164,7 @@ class StatsCommand extends Command {
                             .setThumbnail('https://i.imgur.com/oN7uYB7.png')
                             .setFooter("For help contact the mods.", "https://i.imgur.com/pif0c21.png")
                             .setTimestamp()
-                        message.member.roles.add("927565534684405760")
+                        message.member.roles.add("929780185040027728")
                             .then(
                                 message.author.send({embed}),
                                 console.log(chalk.yellow(`Succesfuly added role to member ${message.author.tag}`))

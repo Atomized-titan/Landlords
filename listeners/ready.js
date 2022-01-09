@@ -2,7 +2,6 @@ const { Listener } = require('discord-akairo');
 const fetch = require('node-fetch');
 const cheerio = require("cheerio");
 const axios = require('axios');
-const chalk = require('chalk');
 const puppeteer = require('puppeteer')
 
 // const got = require("got");
@@ -109,7 +108,7 @@ module.exports = class ReadyListener extends Listener {
 
     // updateFunction1();
 
-    this.client.user.setActivity(`Busy Landlording`, { type: 'PLAYING' });
+    this.client.user.setActivity(`Detecting Landlords`, { type: 'PLAYING' });
 
 
     // let i = 0;
