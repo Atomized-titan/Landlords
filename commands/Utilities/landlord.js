@@ -1,5 +1,5 @@
 const { Command } = require('discord-akairo');
-const chalk = require('chalk');
+// const chalk = require('chalk');
 const Discord = require('discord.js')
 const puppeteer = require('puppeteer')
 const mongoose = require("mongoose")
@@ -167,7 +167,7 @@ class StatsCommand extends Command {
                         message.member.roles.add("929780185040027728")
                             .then(
                                 message.author.send({embed}),
-                                console.log(chalk.yellow(`Succesfuly added role to member ${message.author.tag}`))
+                                console.log(`Succesfuly added role to member ${message.author.tag}`)
                             )
                             .catch(console.error)
 
