@@ -13,7 +13,7 @@ var uniqueValidator = require('mongoose-unique-validator');
 class StatsCommand extends Command {
     constructor() {
         super('landlord', {
-            aliases: ['landlord', 'Landlord', "LANDLORD"],
+            aliases: ['landlord'],
             channel: 'guild',
             category: 'Utilities',
             description: {
