@@ -80,10 +80,14 @@ class StatsCommand extends Command {
 
                 // await appChannel.send(`Your wallet address is : ` + "``" + `${ans}` + "``");
                 await appChannel.send({ embed });
+                function timeout(ms) {
+                    return new Promise((resolve) => setTimeout(resolve, ms));
+                }
 
                 const browser = await puppeteer.launch();
                 const page = await browser.newPage();
-                await page.goto(`https://scan.factorychain.io/#/tokens/0x1e8bc5dd400664b7bddbe36eadbf413db28c0649/frc721/${ans.trim()}`, { waitUntil: 'networkidle0' });
+                await page.goto(`https://scan.factorychain.io/#/tokens/0x1e8bc5dd400664b7bddbe36eadbf413db28c0649/frc721/${ans.trim()}`);
+                await timeout(7000);
                 await page.waitForSelector('#__layout > section > main > div > section > div.card.tomo-card.tomo-card--token > div.tomo-card__body > div > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.tomo-card-value')
                 let element = await page.$('#__layout > section > main > div > section > div.card.tomo-card.tomo-card--token > div.tomo-card__body > div > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.tomo-card-value')
                 let data = await page.evaluate(el => el.textContent, element)
@@ -166,7 +170,7 @@ class StatsCommand extends Command {
                             .setTimestamp()
                         message.member.roles.add("929780185040027728")
                             .then(
-                                message.author.send({embed}),
+                                message.author.send({ embed }),
                                 console.log(`Succesfuly added role to member ${message.author.tag}`)
                             )
                             .catch(console.error)
