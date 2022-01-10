@@ -91,7 +91,7 @@ class StatsCommand extends Command {
                         '--disable-setuid-sandbox']
                 })
                 const page = await browser.newPage();
-                await page.setDefaultNavigationTimeout(0); 
+                await page.setDefaultNavigationTimeout(0);
                 await page.goto(`https://scan.factorychain.io/#/tokens/0x1e8bc5dd400664b7bddbe36eadbf413db28c0649/frc721/${ans.trim()}`);
                 await timeout(7000);
                 await page.waitForSelector('#__layout > section > main > div > section > div.card.tomo-card.tomo-card--token > div.tomo-card__body > div > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.tomo-card-value')
@@ -121,6 +121,7 @@ class StatsCommand extends Command {
                         .setThumbnail('https://i.imgur.com/J615WSS.png')
                         .setFooter("For help contact the mods.", "https://i.imgur.com/pif0c21.png")
                         .setTimestamp()
+                        await browser.close()
                     message.author.send({ embed })
                 }
                 else {
@@ -150,6 +151,7 @@ class StatsCommand extends Command {
                                 .setThumbnail('https://i.imgur.com/Xtcr2P7.png')
                                 .setFooter("For help contact the mods.", "https://i.imgur.com/pif0c21.png")
                                 .setTimestamp()
+                                await browser.close()
                             return message.author.send({ embed })
                         }
                         else if (e.keyPattern.username === 1) {
@@ -160,6 +162,7 @@ class StatsCommand extends Command {
                                 .setThumbnail('https://i.imgur.com/Xtcr2P7.png')
                                 .setFooter("For help contact the mods.", "https://i.imgur.com/pif0c21.png")
                                 .setTimestamp()
+                                await browser.close()
                             return message.author.send({ embed })
                         }
                     }
@@ -177,10 +180,11 @@ class StatsCommand extends Command {
                         message.member.roles.add("929780185040027728")
                             .then(
                                 message.author.send({ embed }),
-                                console.log(`Succesfuly added role to member ${message.author.tag}`)
+                                console.log(`Succesfuly added role to member ${message.author.tag}`),
                             )
                             .catch(console.error)
 
+                        await browser.close()
 
                         // const savedUser = await newUser.save();
                         // newUser.plugin(uniqueValidator, { message: 'user already exists!' });
@@ -189,16 +193,21 @@ class StatsCommand extends Command {
 
 
                 }
-            }).catch((e) => {
+            }).catch(async (e) => {
                 console.log(e)
                 message.reply('No answer after 1 minute 30 seconds, operation canceled.');
+
+                await browser.close()
+
 
             })
 
         }
         else {
 
+            await browser.close()
             return message.channel.send(`<@${message.author.id}> You already have the role "Landlord" `)
+
         }
 
     }
