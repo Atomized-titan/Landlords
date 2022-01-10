@@ -183,7 +183,8 @@ class StatsCommand extends Command {
 
 
                 }
-            }).catch(() => {
+            }).catch((e) => {
+                console.log(e)
                 message.reply('No answer after 1 minute 30 seconds, operation canceled.');
 
             })
