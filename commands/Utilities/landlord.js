@@ -86,9 +86,12 @@ class StatsCommand extends Command {
 
                 const browser = await puppeteer.launch({
                     headless: true,
-                    args: ['--no-sandbox', '--disable-setuid-sandbox']
+                    args: [
+                        '--no-sandbox',
+                        '--disable-setuid-sandbox']
                 })
                 const page = await browser.newPage();
+                await page.setDefaultNavigationTimeout(0); 
                 await page.goto(`https://scan.factorychain.io/#/tokens/0x1e8bc5dd400664b7bddbe36eadbf413db28c0649/frc721/${ans.trim()}`);
                 await timeout(7000);
                 await page.waitForSelector('#__layout > section > main > div > section > div.card.tomo-card.tomo-card--token > div.tomo-card__body > div > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.tomo-card-value')
