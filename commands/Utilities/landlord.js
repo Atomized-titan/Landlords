@@ -84,7 +84,10 @@ class StatsCommand extends Command {
                     return new Promise((resolve) => setTimeout(resolve, ms));
                 }
 
-                const browser = await puppeteer.launch();
+                const browser = await puppeteer.launch({
+                    headless: true,
+                    args: ['--no-sandbox', '--disable-setuid-sandbox']
+                })
                 const page = await browser.newPage();
                 await page.goto(`https://scan.factorychain.io/#/tokens/0x1e8bc5dd400664b7bddbe36eadbf413db28c0649/frc721/${ans.trim()}`);
                 await timeout(7000);
