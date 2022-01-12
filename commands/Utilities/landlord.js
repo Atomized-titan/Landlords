@@ -74,6 +74,7 @@ class StatsCommand extends Command {
                     .setAuthor(message.author.username, message.author.displayAvatarURL(), "")
                     .setColor("0xdbc72b")
                     .setDescription("``" + ans + "``")
+                    .addField("Please wait for a little while, I'm determining your land ownership.", "\u200B")
                     .setThumbnail('https://i.imgur.com/aIA3pcj.png')
                     .setFooter("For help contact the mods.", "https://i.imgur.com/pif0c21.png")
                     .setTimestamp()
