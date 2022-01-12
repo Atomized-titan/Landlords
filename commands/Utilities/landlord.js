@@ -85,7 +85,7 @@ class StatsCommand extends Command {
                 }
 
                 const browser = await puppeteer.launch({
-                    headless: true,
+                    headless: false,
                     args: [
                         '--no-sandbox',
                         '--disable-setuid-sandbox']
@@ -195,6 +195,16 @@ class StatsCommand extends Command {
                 }
             }).catch(async (e) => {
                 console.log(e)
+                if(e instanceof puppeteer.TimeoutError){
+                    const embed = new Discord.MessageEmbed()
+                    .setTitle("Unfortunately, it looks like the bot has encountered some problems when determining your land ownership. This usually happens during peak hours, please try again later if it's possible, thanks for your precious time.")
+                    .setAuthor(message.author.username, message.author.displayAvatarURL(), "")
+                    .setColor("0xdbc72b")
+                    .setThumbnail('https://i.imgur.com/KnpJt83.png')
+                    .setFooter("For help contact the mods.", "https://i.imgur.com/pif0c21.png")
+                    .setTimestamp()
+                    message.author.send({embed})
+                }
                 message.reply('No answer after 1 minute 30 seconds, operation canceled.');
 
                 await browser.close()
