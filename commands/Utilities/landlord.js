@@ -93,12 +93,13 @@ class StatsCommand extends Command {
                 })
                 const page = await browser.newPage();
                 await page.setDefaultNavigationTimeout(0);
-                await page.goto(`https://scan.factorychain.io/#/tokens/0x1e8bc5dd400664b7bddbe36eadbf413db28c0649/frc721/${ans.trim()}`);
+                await page.goto(`https://scan.factorychain.io/address/${ans.trim()}/tokens`);
                 await timeout(7000);
-                await page.waitForSelector('#__layout > section > main > div > section > div.card.tomo-card.tomo-card--token > div.tomo-card__body > div > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.tomo-card-value')
-                let element = await page.$('#__layout > section > main > div > section > div.card.tomo-card.tomo-card--token > div.tomo-card__body > div > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.tomo-card-value')
-                let data = await page.evaluate(el => el.textContent, element)
-                console.log(data)
+                // await page.waitForSelector('#__layout > section > main > div > section > div.card.tomo-card.tomo-card--token > div.tomo-card__body > div > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.tomo-card-value')
+                // let element = await page.$('#__layout > section > main > div > section > div.card.tomo-card.tomo-card--token > div.tomo-card__body > div > div:nth-child(1) > table > tbody > tr:nth-child(2) > td.tomo-card-value')
+                // let data = await page.evaluate(el => el.textContent, element)
+                const found = await page.evaluate(() => window.find("LAND"));
+                console.log(found)
 
                 console.log(ans.substring(0, 2))
                 if (ans.substring(0, 2) !== "0x") {
@@ -113,7 +114,7 @@ class StatsCommand extends Command {
                     return message.author.send({ embed })
                 }
 
-                if (data === "0") {
+                if (!found) {
                     const embed = new Discord.MessageEmbed()
                         .setTitle("Unfortunately We found that you do not hold any lands. Please try again if you think this is a mistake.")
                         .setAuthor(message.author.username, message.author.displayAvatarURL(), "")
