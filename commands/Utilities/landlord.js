@@ -111,6 +111,7 @@ class StatsCommand extends Command {
                         .setThumbnail('https://i.imgur.com/vRBKSbf.png')
                         .setFooter("For help contact the mods.", "https://i.imgur.com/pif0c21.png")
                         .setTimestamp()
+                        await browser.close()
                     return message.author.send({ embed })
                 }
 
@@ -197,7 +198,7 @@ class StatsCommand extends Command {
                 }
             }).catch(async (e) => {
                 console.log(e)
-                if(e instanceof puppeteer.TimeoutError){
+                if(e instanceof TimeoutError){
                     const embed = new Discord.MessageEmbed()
                     .setTitle("Unfortunately, it looks like the bot has encountered some problems when determining your land ownership. This usually happens during peak hours, please try again later if it's possible, thanks for your precious time.")
                     .setAuthor(message.author.username, message.author.displayAvatarURL(), "")
@@ -206,11 +207,11 @@ class StatsCommand extends Command {
                     .setFooter("For help contact the mods.", "https://i.imgur.com/pif0c21.png")
                     .setTimestamp()
                     message.author.send({embed})
+                    await browser.close()
                 }
                 message.reply('No answer after 1 minute 30 seconds, operation canceled.');
 
                 await browser.close()
-
 
             })
 
