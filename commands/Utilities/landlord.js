@@ -218,7 +218,6 @@ class StatsCommand extends Command {
         }
         else {
 
-            await browser.close()
             return message.channel.send(`<@${message.author.id}> You already have the role "Landlord" `)
 
         }
