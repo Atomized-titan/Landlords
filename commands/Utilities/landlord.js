@@ -103,11 +103,12 @@ class StatsCommand extends Command {
 
                 console.log(ans.substring(0, 2))
                 if (ans.substring(0, 2) !== "0x") {
+                    console.log("Invalid address format was entered:" + ans)
                     const embed = new Discord.MessageEmbed()
                         .setTitle("This is not a valid wallet addresss!")
                         .setAuthor(message.author.username, message.author.displayAvatarURL(), "")
                         .setColor("0xdbc72b")
-                        .setDescription("Your wallet address might look like this ``0x36113b19dd4a8***************be046209d702`` and start with '0x'")
+                        .setDescription("Your wallet address might look like this ``0x361g56gfsgda8***************be0468b25372`` and start with '0x'")
                         .setThumbnail('https://i.imgur.com/vRBKSbf.png')
                         .setFooter("For help contact the mods.", "https://i.imgur.com/pif0c21.png")
                         .setTimestamp()
@@ -116,6 +117,7 @@ class StatsCommand extends Command {
                 }
 
                 if (!found) {
+                    console.log("Could not find any lands with that address")
                     const embed = new Discord.MessageEmbed()
                         .setTitle("Unfortunately We found that you do not hold any lands. Please try again if you think this is a mistake.")
                         .setAuthor(message.author.username, message.author.displayAvatarURL(), "")
@@ -146,6 +148,7 @@ class StatsCommand extends Command {
                     } catch (e) {
                         console.log(e)
                         if (e.keyPattern.address === 1) {
+                            console.log("wallet address already exists")
 
                             const embed = new Discord.MessageEmbed()
                                 .setTitle("Wallet address owner already exists. If you think this is a mistake please contact the mods.")
@@ -158,6 +161,7 @@ class StatsCommand extends Command {
                             return message.author.send({ embed })
                         }
                         else if (e.keyPattern.username === 1) {
+                            console.log("Username already exists")
                             const embed = new Discord.MessageEmbed()
                                 .setTitle("Wallet address owner already exists. If you think this is a mistake please contact the mods.")
                                 .setAuthor(message.author.username, message.author.displayAvatarURL(), "")
@@ -218,7 +222,9 @@ class StatsCommand extends Command {
         }
         else {
 
-            return message.channel.send(`<@${message.author.id}> You already have the role "Landlord" `)
+            return message.channel.send(`<@${message.author.id}> You already have the role "Landlord" `).then(msg => {
+                setTimeout(() => msg.delete(), 20000)
+              })
 
         }
 
